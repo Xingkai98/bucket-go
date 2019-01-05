@@ -7,10 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="540" Width="960">
     <Grid Background="#FFE5E5E5">
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="396" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="532"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="511" VerticalAlignment="Top" Width="360" Margin="593,0,0,-0.333" Background="Gainsboro"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="511" VerticalAlignment="Top" Width="309" Margin="644,0,0,-0.333" Background="Gainsboro">
+            <Grid Height="476" Width="256">
+                <Button Content="添加标记" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Width="256" Height="30"/>
+                <ScrollViewer HorizontalAlignment="Left" Height="317" Margin="0,10,0,0" VerticalAlignment="Top" Width="256">
+                    <TextBlock TextWrapping="Wrap" Text="这部分主要是记录所有分组的标记情况。" FontSize="24" Height="247" Width="246"/>
+                </ScrollViewer>
+                <TextBlock HorizontalAlignment="Left" Margin="2,347,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小："/>
+                <Button Content="开始模拟" HorizontalAlignment="Left" Margin="0,446,0,0" VerticalAlignment="Top" Width="256" Height="30"/>
+                <TextBox HorizontalAlignment="Left" Height="22" Margin="82,347,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="164" TextChanged="TextBox_TextChanged"/>
+                <TextBlock HorizontalAlignment="Left" Margin="2,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90"><Run Text="入桶"/><Run Text="时间"/><Run Text="："/></TextBlock>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="82,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="164" TextChanged="TextBox_TextChanged"/>
+            </Grid>
+        </ScrollViewer>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="390" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="589"/>
         <Menu HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="953"/>
-        <TextBlock HorizontalAlignment="Left" Margin="24,47,0,0" TextWrapping="Wrap" Text="展示" VerticalAlignment="Top" FontSize="20"/>
-        <Image Source="Pack://Application:,,,/Resources/bucket.png" Width="133" HorizontalAlignment="Left" Margin="222,231,0,138.667" />
+        <TextBlock HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="25" Width="318"><Run Text="当前时间："/><Run Text="100ms"/><Run Text="（一个计时器）"/></TextBlock>
+        <Image Source="Pack://Application:,,,/Resources/bucket.png" Width="133" HorizontalAlignment="Left" Margin="234,209,0,160.667" RenderTransformOrigin="0.5,0.5" >
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.131"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Window>
