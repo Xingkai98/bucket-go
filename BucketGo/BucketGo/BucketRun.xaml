@@ -9,29 +9,32 @@
     <Grid Background="#FFE5E5E5">
         <ScrollViewer HorizontalAlignment="Left" Height="511" VerticalAlignment="Top" Width="309" Margin="644,0,0,-0.333" Background="Gainsboro">
             <Grid Height="476" Width="256">
-                <Button Content="添加标记" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Width="256" Height="30"/>
+                <Button x:Name="AddPacket" Content="添加分组" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Add_Packet"/>
                 <ScrollViewer HorizontalAlignment="Left" Height="317" Margin="0,10,0,0" VerticalAlignment="Top" Width="256">
-                    <TextBlock TextWrapping="Wrap" Text="这部分主要是记录所有分组的标记情况。" FontSize="24" Height="247" Width="246"/>
+                    <TextBox x:Name="RightSideText" TextWrapping="Wrap" FontSize="24" Height="317" Width="233"/>
                 </ScrollViewer>
                 <TextBlock HorizontalAlignment="Left" Margin="2,347,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小："/>
-                <Button Content="开始模拟" HorizontalAlignment="Left" Margin="0,446,0,0" VerticalAlignment="Top" Width="256" Height="30"/>
-                <TextBox HorizontalAlignment="Left" Height="22" Margin="82,347,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="164" TextChanged="TextBox_TextChanged"/>
+                <Button x:Name="StartAnimation" Content="开始模拟" HorizontalAlignment="Left" Margin="0,446,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Start_Animation"/>
+                <TextBox x:Name="SizeInput" HorizontalAlignment="Left" Height="22" Margin="82,347,0,0" TextWrapping="Wrap" Text="{Binding Size}" VerticalAlignment="Top" Width="164" TextChanged="Size_Input_TextChanged"/>
                 <TextBlock HorizontalAlignment="Left" Margin="2,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90"><Run Text="入桶"/><Run Text="时间"/><Run Text="："/></TextBlock>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="82,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="164" TextChanged="TextBox_TextChanged"/>
+                <TextBox x:Name="TimeInput" HorizontalAlignment="Left" Margin="82,374,0,79" TextWrapping="Wrap" Text="{Binding Time}" Width="164" TextChanged="Time_Input_TextChanged"/>
             </Grid>
         </ScrollViewer>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="390" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="589"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="191" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="588"/>
         <Menu HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="953"/>
         <TextBlock HorizontalAlignment="Left" Margin="24,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="25" Width="318"><Run Text="当前时间："/><Run Text="100ms"/><Run Text="（一个计时器）"/></TextBlock>
-        <Image Source="Pack://Application:,,,/Resources/bucket.png" Width="133" HorizontalAlignment="Left" Margin="234,209,0,160.667" RenderTransformOrigin="0.5,0.5" >
+        <Image x:Name="test" Source="Pack://Application:,,,/Resources/bucket.png" HorizontalAlignment="Left" Margin="126,145,0,278.667" RenderTransformOrigin="0.5,0.5" Width="87" >
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-90.131"/>
+                    <RotateTransform Angle="0.158"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
+        <ScrollViewer HorizontalAlignment="Left" Height="184" Margin="24,301,0,0" VerticalAlignment="Top" Width="588">
+            <TextBlock x:Name="LeftSideText"  TextWrapping="Wrap"/>
+        </ScrollViewer>
     </Grid>
 </Window>
