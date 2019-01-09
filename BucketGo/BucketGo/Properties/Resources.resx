@@ -130,4 +130,109 @@
   <data name="testblock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\testblock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="littleblock1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_green5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_green5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littleblock_red5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littleblock_red5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="littlebucket9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\littlebucket9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

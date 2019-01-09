@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+//using System.Timers.Timer;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 //
 namespace BucketGo
@@ -23,7 +25,7 @@ namespace BucketGo
     /// </summary>
     public partial class MainWindow : Window
     {
-        //packet实现可排序接口
+        //Data实现动态绑定接口
         public class Data : INotifyPropertyChanged
         {
             private double time;
@@ -62,6 +64,7 @@ namespace BucketGo
 
         }
 
+        //packet实现可排序接口
         public class Packet : IComparable <Packet>
         {
             int id;
@@ -90,6 +93,9 @@ namespace BucketGo
         public int[] a = new int[10];
         public Packet[] p = new Packet[MAX_PACKET];
         public Data d = new Data();
+        public System.Timers.Timer timer;
+        public long startMillis = 0;
+        public int tickCount = 0;
 
         public MainWindow()
         {
@@ -103,9 +109,58 @@ namespace BucketGo
         private void Button_Click_Start_Animation(object sender, RoutedEventArgs e)
         {
             //IsEnabled = false;
+            timer = new System.Timers.Timer(100);
+            //timer.Interval = TimeSpan.FromMilliseconds(100);
+            //设置是否执行System.Timers.Timer.Elapsed事件
+            timer.Enabled = true;
+            //绑定Elapsed事件
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+            //timer.Tick += timer_Tick;
+            timer.Start();
+            long currentTicks = DateTime.Now.Ticks;
+            DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            startMillis = (currentTicks - dtFrom.Ticks) / 10000;
+            //int time = 0;
             Animation.LeftSlide(littleblock, 0);
+            Animation.RightSlide(littleblock_red, Animation.AppearDuration + Animation.MoveDuration);
+            //Animation.Appear(littlebucket16);
+            Animation.Disappear(littlebucket16);
         }
 
+        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            tickCount++;
+            if (tickCount % 10 == 0)
+            {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Animation.Appear(littlebucket16);
+                }));
+            }
+            if (tickCount % 10 == 5)
+            {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Animation.Disappear(littlebucket16);
+                }));
+            }
+            //long currentTicks = DateTime.Now.Ticks;
+            //DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            //long currentMillis = (currentTicks - dtFrom.Ticks) / 10000;
+            //long timeElapsed = currentMillis - startMillis;
+
+            //time.Text = tickCount.ToString();
+        }
+        private void Test()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                Animation.Appear(littlebucket16);
+                Thread.Sleep(1000);
+                Animation.Disappear(littlebucket16);
+            }
+        }
         //"添加分组"按钮函数，使用多线程处理
         private void Button_Click_Add_Packet(object sender, RoutedEventArgs e)
         {
@@ -124,13 +179,16 @@ namespace BucketGo
             int tempSize = d.Size;
             Packet temp = new Packet(tempId, tempTime, tempSize);
             p[currentPacketId] = temp;
-            currentPacketId++;
+            
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
                 //存储时，分组的Id是从0开始的，而展示时分组的Id是从1开始的
                 int tempShowId = currentPacketId + 1;
                 RightSideText.Text += tempShowId + "号分组到达时间：" + tempTime + "ms, 分组大小：" + tempSize + "字节。\n";
+                //这里若写在Dispatcher外部，则会先运行。
+                currentPacketId++;
             }));
+            
         }
 
         private void Size_Input_TextChanged(object sender, TextChangedEventArgs e)
@@ -141,6 +199,31 @@ namespace BucketGo
         private void Time_Input_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Throw_Packet(object sender, RoutedEventArgs e)
+        {
+            // Initialize a new Rectangle
+            Rectangle r = new Rectangle();
+
+            // Set up rectangle's size
+            r.Width = 50;
+            r.Height = 50;
+
+            // Set up the Background color
+            r.Fill = Brushes.Black;
+
+            // Set up the position in the window, at mouse coordonate
+            Canvas.SetTop(r, 50);
+            Canvas.SetLeft(r, 50);
+
+            // Add rectangle to the Canvas
+            this.main.Children.Add(r);
         }
     }
 }

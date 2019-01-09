@@ -12,25 +12,40 @@
             <RowDefinition Height="46*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="190" Margin="10,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="634" Grid.RowSpan="2"/>
-        <Image x:Name="littleblock" Source="Pack://Application:,,,/Resources/littleblock.png" HorizontalAlignment="Left" Margin="41,161,0,296.667" RenderTransformOrigin="0.5,0.5" Width="61" Grid.RowSpan="2" />
+        <Canvas x:Name="main" Background="White" HorizontalAlignment="Left" Height="190" Margin="10,90,0,0"  VerticalAlignment="Top" Width="634" Grid.RowSpan="2"/>
+        <Image x:Name="littleblock" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock.png" HorizontalAlignment="Left" Margin="10,163,0,294.667" RenderTransformOrigin="0.5,0.5" Width="62" Grid.RowSpan="2" />
+        <Image x:Name="littleblock_red" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red.png" HorizontalAlignment="Left" Margin="296,163,0,294.667" RenderTransformOrigin="0.5,0.5" Width="62" Grid.RowSpan="2" />
+
+        <Image x:Name="littlebucket0" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket0.png" HorizontalAlignment="Left" Margin="274,143,0,274.667" RenderTransformOrigin="0.5,0.5" Width="106" Grid.RowSpan="2" />
+        <Image x:Name="littlebucket16" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket16.png" HorizontalAlignment="Left" Margin="274,143,0,274.667" RenderTransformOrigin="0.5,0.5" Width="106" Grid.RowSpan="2" />
 
         <ScrollViewer HorizontalAlignment="Left" Height="511" VerticalAlignment="Top" Width="309" Margin="644,0,0,-0.333" Background="Gainsboro" Grid.RowSpan="2">
             <Grid Height="476" Width="256">
-                <Button x:Name="AddPacket" Content="添加分组" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Add_Packet"/>
+                <Button x:Name="AddPacket" Content="添加分组" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Throw_Packet"/>
                 <ScrollViewer HorizontalAlignment="Left" Height="317" Margin="0,10,0,0" VerticalAlignment="Top" Width="256">
-                    <TextBox x:Name="RightSideText" TextWrapping="Wrap" FontSize="24" Height="317" Width="233"/>
+                    <TextBox x:Name="RightSideText" TextWrapping="Wrap" Height="317" Width="233"/>
                 </ScrollViewer>
                 <TextBlock HorizontalAlignment="Left" Margin="2,347,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小："/>
                 <Button x:Name="StartAnimation" Content="开始模拟" HorizontalAlignment="Left" Margin="0,446,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Start_Animation"/>
                 <TextBox x:Name="SizeInput" HorizontalAlignment="Left" Height="22" Margin="82,347,0,0" TextWrapping="Wrap" Text="{Binding Size}" VerticalAlignment="Top" Width="164" TextChanged="Size_Input_TextChanged"/>
                 <TextBlock HorizontalAlignment="Left" Margin="2,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90"><Run Text="入桶"/><Run Text="时间"/><Run Text="："/></TextBlock>
                 <TextBox x:Name="TimeInput" HorizontalAlignment="Left" Margin="82,374,0,79" TextWrapping="Wrap" Text="{Binding Time}" Width="164" TextChanged="Time_Input_TextChanged"/>
+                <TextBlock HorizontalAlignment="Left" Margin="-645,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小："/>
+
             </Grid>
         </ScrollViewer>
         <Menu HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="953"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="25" Width="318"><Run Text="当前时间："/><Run Text="100ms"/><Run Text="（一个计时器）"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="199" Margin="10,113.333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="634" Grid.Row="1"/>
+        <TextBlock x:Name="time" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="25" Width="318" Text="0"></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="168" Margin="10,144.333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="634" Grid.Row="1"/>
+        <Grid HorizontalAlignment="Left" Height="43" Margin="10,96.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="634">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="108" FontSize="16"><Run Text="承诺突发度"/><Run Text="："/></TextBlock>
+            <TextBox HorizontalAlignment="Left" Height="25" Margin="105,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" TextChanged="TextBox_TextChanged"/>
+            <TextBlock HorizontalAlignment="Left" Margin="285,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="108" FontSize="16"><Run Text="承诺突发度"/><Run Text="："/></TextBlock>
+            <TextBox HorizontalAlignment="Left" Height="25" Margin="383,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" TextChanged="TextBox_TextChanged"/>
+            <Button Content="设置" HorizontalAlignment="Left" Margin="546,10,0,0" VerticalAlignment="Top" Width="81" Height="25"/>
+            <TextBlock HorizontalAlignment="Left" Margin="196,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16"><Run Text="比特/秒"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="480,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16"><Run Text="比特/秒"/></TextBlock>
+        </Grid>
 
     </Grid>
 </Window>
