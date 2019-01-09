@@ -95,7 +95,7 @@ namespace BucketGo
         {
             InitializeComponent();
             //imageList = { test };
-            Image[] imageList = { test };
+            Image[] imageList = { littleblock };
             //image.IsEnabled = true;
             this.DataContext = d;
         }
@@ -103,7 +103,7 @@ namespace BucketGo
         private void Button_Click_Start_Animation(object sender, RoutedEventArgs e)
         {
             //IsEnabled = false;
-            Animation.MoveRight(test, 0);
+            Animation.LeftSlide(littleblock, 0);
         }
 
         //"添加分组"按钮函数，使用多线程处理

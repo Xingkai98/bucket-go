@@ -14,16 +14,19 @@ namespace BucketGo
     {
         private static ThicknessAnimation marginAnimations;
         public const int step = 66;
-        public const int path = 100;
-        public const double duration = 2.0;
-        public static void MoveRight(Image i, int startTime)
+        //path为从左到中间以及从中间到右侧的距离
+        public const int path = 200;
+        //duration为从左侧移动到中间或从中间移动到右侧的时间
+        public const int duration = 2000;
+        //startTime为毫秒数，例如100表示100毫秒
+        public static void LeftSlide(Image i, int startTime)
         {
             marginAnimations = new ThicknessAnimation
             {
-                BeginTime = new TimeSpan(0, 0, startTime),
+                BeginTime = new TimeSpan(0, 0, 0, 0, startTime),
                 From = new Thickness(i.Margin.Left, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
                 To = new Thickness(i.Margin.Left + path, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
-                Duration = TimeSpan.FromSeconds(duration),
+                Duration = TimeSpan.FromMilliseconds(duration),
                 FillBehavior = FillBehavior.HoldEnd
             };
 
