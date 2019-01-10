@@ -35,6 +35,7 @@ namespace BucketGo
         public Packet[] p = new Packet[MAX_PACKET];
         public Data d = new Data();
         public Timeline myTimeLine = new Timeline();
+        public token_bucket calculator = new token_bucket();
         //public List<Image> image = new List<Image>();   
         public List<Image> bucketList = new List<Image>();
         public List<Image> blockList = new List<Image>();
@@ -166,7 +167,73 @@ namespace BucketGo
         //计算出时间线并开始动画
         private void Button_Click_Start_Animation(object sender, RoutedEventArgs e)
         {
-
+            //向calculator输入数据以供计算
+            calculator.rate = Speed_;
+            calculator.bucket_size = Bucket_;
+            int maxTime = 0;
+            for (int i = 0; i < currentPacketId; i++)
+            {
+                if (p[i].arrivalTime > maxTime)
+                    maxTime = p[i].arrivalTime;
+            }
+            for (int i = 0; i < currentPacketId; i++)
+            {
+                calculator.packet_size[p[i].arrivalTime]=p[i].size;
+            }
+            maxTime++;
+            calculator.calculate(maxTime);
+            //还需要维护一下最大分组长度和最小分组长度，以便生成分组时选择大小
+            int maxSize = 0;
+            for(int i=0;i< currentPacketId; i++)
+            {
+                if (p[i].size > maxSize)
+                    maxSize = p[i].size;
+            }
+            int minSize = maxSize;
+            for (int i = 0; i < currentPacketId; i++)
+            {
+                if (p[i].size < minSize)
+                    minSize = p[i].size;
+            }
+            //计算完毕，接下来根据时间线进行动画模拟
+            for (int i = 0; i < maxTime; i++)
+            {
+                if (calculator.packet_size[i] > 0)
+                {
+                    //int temp = i;
+                    //x秒进入桶，对应调用动画为10(x-1)下标
+                    //颜色假设calculator中1为红色0为绿色则
+                    //进行大小的翻译
+                    //int translated_size = ((double)calculator.packet_size[i]- (double)minSize)/((double)maxSize - (double)minSize)*(double)2+(double)1
+                    int temp = calculator.packet_size[i];
+                    int translated_size = 0;
+                    int gap = (maxSize - minSize)/3;
+                    if(temp>=minSize && temp < minSize + gap)
+                    {
+                        translated_size = 1;
+                    }
+                    else if(temp >= minSize+gap && temp < minSize + 2 * gap)
+                    {
+                        translated_size = 2;
+                    }
+                    else
+                    {
+                        translated_size = 3;
+                    }
+                    if (calculator.color[i] == 1)
+                    {
+                        myTimeLine.PacketGoTimeLine[10 * (i - 1)] = GREEN;
+                        myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                    }
+                    else
+                    {
+                        myTimeLine.PacketGoTimeLine[10 * (i - 1)] = RED;
+                        myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                    }
+                        
+                }
+            }
+            int wwwww = 0;
             timer = new System.Timers.Timer(100);
             //timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Enabled = true;
@@ -175,6 +242,28 @@ namespace BucketGo
             long currentTicks = DateTime.Now.Ticks;
             DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             startMillis = (currentTicks - dtFrom.Ticks) / 10000;
+        }
+        //Timer的周期性操作函数
+        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            tickCount++;
+            if (tickCount <= 500)
+                updateBucket(tickCount);
+            //这里还要设置一下包的大小，现在是都是1
+            if (myTimeLine.PacketGoTimeLine[tickCount] == GREEN)
+            {
+                doBlockMove(GREEN, myTimeLine.PacketGoTimeLine_Size[tickCount]);
+            }
+            if (myTimeLine.PacketGoTimeLine[tickCount] == RED)
+            {
+                doBlockMove(RED, myTimeLine.PacketGoTimeLine_Size[tickCount]);
+            }
+            //long currentTicks = DateTime.Now.Ticks;
+            //DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            //long currentMillis = (currentTicks - dtFrom.Ticks) / 10000;
+            //long timeElapsed = currentMillis - startMillis;
+
+            //time.Text = tickCount.ToString();
         }
         private void doBlockMove(int out_color,int size)
         {
@@ -235,53 +324,7 @@ namespace BucketGo
             }
         }
 
-        //Timer的周期性操作函数
-        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            tickCount++;
-            if(tickCount <= 500)
-                updateBucket(tickCount);
-            //if (tickCount % 10 == 0)
-            //{
-            //    this.Dispatcher.BeginInvoke(new Action(() =>
-            //    {
-            //        Animation.Appear(littlebucket16);
-            //    }));
-            //}
-            //if (tickCount % 10 == 5)
-            //{
-            //    this.Dispatcher.BeginInvoke(new Action(() =>
-            //    {
-            //        Animation.Disappear(littlebucket16);
-            //    }));
-            //}
-            if(tickCount == 10)
-            {
-                doBlockMove(RED, 1);
-            }
-            if(tickCount == 20)
-            {
-                doBlockMove(GREEN, 3);
-            }
-            if(tickCount == 30)
-            {
-                doBlockMove(RED, 1);
-            }
-            if(tickCount == 40)
-            {
-                doBlockMove(GREEN, 2);
-            }
-            if(tickCount == 50)
-            {
-                doBlockMove(RED, 1);
-            }
-            //long currentTicks = DateTime.Now.Ticks;
-            //DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            //long currentMillis = (currentTicks - dtFrom.Ticks) / 10000;
-            //long timeElapsed = currentMillis - startMillis;
-
-            //time.Text = tickCount.ToString();
-        }
+        
         private void Test()
         {
             while (true)
@@ -340,7 +383,7 @@ namespace BucketGo
                 {
                     //存储时，分组的Id是从0开始的，而展示时分组的Id是从1开始的
                     int tempShowId = currentPacketId + 1;
-                    RightSideText.Text += tempShowId + "号分组到达时间：" + tempTime + "ms, 分组大小：" + tempSize + "字节。\n";
+                    RightSideText.Text += tempShowId + "号分组到达时间：" + tempTime + "秒, 分组大小：" + tempSize + "比特。\n";
                     //这里若写在Dispatcher外部，则会先运行。
                     currentPacketId++;
                 }));

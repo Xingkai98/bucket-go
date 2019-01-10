@@ -9,49 +9,66 @@ namespace BucketGo
     //1,2,3,4号进入的时间分散为1,2,3,4秒，即1000,2000,3000,4000毫秒
     public class token_bucket
     {
-	    public int rate = 40;//令牌产生速率
+        public int rate = 40;//令牌产生速率
         public int[] color = new int[50];//packet颜色
         public int bucket_size = 50;//桶的大小
+        //若packet_size[i]不为0，则有包在i秒进入并被标为color[i]
         public int[] packet_size = new int[50]; //{ 20, 10, 50, 60 };//packet分组的大小
         public int[] token_left_array = new int[50];
+        public int[] token_before_array = new int[50];
 
-        token_bucket()
+        public token_bucket()
         {
             //4表示1,2,3,4四个包在1,2,3,4秒进入
 
-            set_color(4);
-            set_left(4);
+            
         }
 
-        void set_color(int time)
+        public void calculate(int time)
+        {
+            set_color(time);
+            set_left(time);
+        }
+        public void set_color(int time)
         {
             int token_left = 0;
             for (int i = 0; i < time; i++)
             {
-                token_left += rate;
 
-                if (token_left > bucket_size)
+                if (packet_size[i] == 0)
                 {
-                    token_left = bucket_size;
-                }
-                if (token_left < packet_size[i])
-                {
-                    color[i] = 0;
+                    color[i] = -1;
+                    token_left += rate;
                 }
                 else
                 {
-                    color[i] = 1;
-                    token_left -= packet_size[i];
-                }
+                    token_left += rate;
 
+                    if (token_left > bucket_size)
+                    {
+                        token_left = bucket_size;
+                    }
+                    if (token_left < packet_size[i])
+                    {
+                        color[i] = 0;
+                    }
+                    else
+                    {
+                        color[i] = 1;
+                        token_left -= packet_size[i];
+                    }
+
+                }
             }
         }
 
-        void set_left(int time)
+        public void set_left(int time)
         {
             int token_left = 0;
+            token_before_array[0] = 0;
             for (int i = 0; i < time; i++)
             {
+
                 token_left += rate;
 
                 if (token_left > bucket_size)
@@ -60,10 +77,12 @@ namespace BucketGo
                 }
                 if (token_left < packet_size[i])
                 {
+                    token_before_array[i] = token_left;
                     token_left_array[i] = token_left;
                 }
                 else
                 {
+                    token_before_array[i] = token_left;
                     token_left -= packet_size[i];
                     token_left_array[i] = token_left;
                 }
@@ -82,8 +101,10 @@ namespace BucketGo
 
         public List<int> BucketTimeLine = new List<int>(1000);
         public List<int> BucketShowTimeLine = new List<int>(1000);
-        public List<bool> IfPacketTimeLine = new List<bool>(1000);
+        //public List<bool> IfPacketTimeLine = new List<bool>(1000);
         public List<int> PacketGoTimeLine = new List<int>(1000);
+        //Size的选择范围是1,2，3
+        public List<int> PacketGoTimeLine_Size = new List<int>(1000);
         public Timeline()
         {
             //初始化BucketTimeLine
@@ -92,6 +113,14 @@ namespace BucketGo
                 BucketTimeLine.Add(i);
             }
             getShowTimeLine();
+            for (int i = 0; i < 1000; i++)
+            {
+                PacketGoTimeLine.Add(0);
+            }
+            for (int i = 0; i < 1000; i++)
+            {
+                PacketGoTimeLine_Size.Add(0);
+            }
 
         }
         public void getShowTimeLine()

@@ -170,11 +170,11 @@
         <Grid HorizontalAlignment="Left" Height="49" Margin="10,306,0,0" VerticalAlignment="Top" Width="634">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="108" FontSize="16" FontWeight="Bold"><Run Text="承诺突发度"/><Run Text="："/></TextBlock>
             <TextBox Text="{Binding Bucket}" HorizontalAlignment="Left" Height="25" Margin="105,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" TextChanged="TextBox_TextChanged"/>
-            <TextBlock HorizontalAlignment="Left" Margin="267,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="130" FontSize="16" FontWeight="Bold"><Run Text="令牌增加速率"/><Run Text="："/></TextBlock>
-            <TextBox Text="{Binding Speed}" HorizontalAlignment="Left" Height="25" Margin="383,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" TextChanged="TextBox_TextChanged"/>
-            <Button Content="设置" HorizontalAlignment="Left" Margin="526,6.327,0,0" VerticalAlignment="Top" Width="89" Height="29.666" Click="Button_Click_Update_Bucket" FontSize="16" Background="#FFF3EBDF" FontWeight="Bold"/>
-            <TextBlock HorizontalAlignment="Left" Margin="196,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16"><Run Text="比特/秒"/></TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="480,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16" FontWeight="Bold"><Run Text="比特"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="253,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="130" FontSize="16" FontWeight="Bold"><Run Text="令牌增加速率"/><Run Text="："/></TextBlock>
+            <TextBox Text="{Binding Speed}" HorizontalAlignment="Left" Height="25" Margin="367,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" TextChanged="TextBox_TextChanged"/>
+            <Button Content="设置" HorizontalAlignment="Left" Margin="543,6,0,0" VerticalAlignment="Top" Width="89" Height="30" Click="Button_Click_Update_Bucket" FontSize="16" Background="#FFF3EBDF" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="196,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16"><Run Text="比特" FontWeight="Bold"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="468,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16" FontWeight="Bold"><Run Text="比特/秒"/></TextBlock>
         </Grid>
 
     </Grid>
