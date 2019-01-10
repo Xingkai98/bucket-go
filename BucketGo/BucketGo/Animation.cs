@@ -20,11 +20,12 @@ namespace BucketGo
         public const int BlockWidth = 62;
         public const int step = 66;
         //path为从左到中间或从中间到右侧的距离
-        public const int LeftPath = (WindowWidth - BlockWidth) / 2;
-        public const int RightPath = (WindowWidth + BlockWidth) / 2;
+        public const int LeftPath = (WindowWidth - BlockWidth) / 2 - 20;
+        public const int RightPath = (WindowWidth + BlockWidth) / 2 +100;
         //duration为从左侧移动到中间或从中间移动到右侧的时间
         public const int AppearDuration = 500;
-        public const int MoveDuration = 2000;
+        public const int MoveDurationLeft = 2000;
+        public const int MoveDurationRight = 2500;
 
         public static void Appear(Image i)
         {
@@ -51,7 +52,7 @@ namespace BucketGo
                 BeginTime = new TimeSpan(0, 0, 0, 0, startTime + AppearDuration),
                 From = new Thickness(i.Margin.Left, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
                 To = new Thickness(i.Margin.Left + LeftPath, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
-                Duration = TimeSpan.FromMilliseconds(MoveDuration),
+                Duration = TimeSpan.FromMilliseconds(MoveDurationLeft),
                 FillBehavior = FillBehavior.HoldEnd
             };
             i.BeginAnimation(Image.OpacityProperty, appearAnimations);
@@ -66,7 +67,7 @@ namespace BucketGo
                 BeginTime = new TimeSpan(0, 0, 0, 0, startTime),
                 From = new Thickness(i.Margin.Left, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
                 To = new Thickness(i.Margin.Left + RightPath, i.Margin.Top, i.Margin.Right, i.Margin.Bottom),
-                Duration = TimeSpan.FromMilliseconds(MoveDuration),
+                Duration = TimeSpan.FromMilliseconds(MoveDurationRight),
                 FillBehavior = FillBehavior.HoldEnd
             };
             i.BeginAnimation(Image.MarginProperty, marginAnimations);

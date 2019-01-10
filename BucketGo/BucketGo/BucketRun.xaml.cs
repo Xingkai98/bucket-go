@@ -25,124 +25,179 @@ namespace BucketGo
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Data实现动态绑定接口
-        public class Data : INotifyPropertyChanged
-        {
-            private double time;
-            private int size;
-
-            public double Time {
-                get
-                {
-                    return time;
-                }
-                set
-                {
-                    time = value;
-                    Notify("Time");
-                }
-            }
-            public int Size
-            {
-                get
-                {
-                    return size;
-                }
-                set
-                {
-                    size = value;
-                    Notify("Size");
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-            public void Notify(String info)
-            {
-                var handler = PropertyChanged;
-                handler?.Invoke(this, new PropertyChangedEventArgs(info));
-            }
-
-        }
-
-        //packet实现可排序接口
-        public class Packet : IComparable <Packet>
-        {
-            int id;
-            double arrivalTime;
-            int size;
-            public Packet()
-            {
-                arrivalTime = 0.0;
-                size = 0;
-            }
-            public Packet(int id, double arrivalTime, int len)
-            {
-                this.id = id;
-                this.arrivalTime = arrivalTime;
-                this.size = len;
-            }
-            public int CompareTo(Packet p)
-            {
-                return this.id.CompareTo(p.id);
-            }
-
-        }
         public const int MAX_PACKET = 100;
         public const int Maximum = 10;
+        public const int RED = 101;
+        public const int GREEN = 102;
         public int currentPacketId = 0;
         public int[] a = new int[10];
         public Packet[] p = new Packet[MAX_PACKET];
         public Data d = new Data();
+        public Timeline myTimeLine = new Timeline();
+        //public List<Image> image = new List<Image>();   
+        public List<Image> bucketList = new List<Image>();
         public System.Timers.Timer timer;
         public long startMillis = 0;
+        //已经进行了多少个100毫秒的周期
         public int tickCount = 0;
+        //桶相关的数据
+        public int Bucket_ = 0;
+        public int Speed_ = 0;
 
         public MainWindow()
         {
             InitializeComponent();
-            //imageList = { test };
-            Image[] imageList = { littleblock };
-            //image.IsEnabled = true;
+            //本语句用于数据绑定，必须要有
             this.DataContext = d;
+            bucketList.Add(littlebucket0);
+            bucketList.Add(littlebucket1);
+            bucketList.Add(littlebucket2);
+            bucketList.Add(littlebucket3);
+            bucketList.Add(littlebucket4);
+            bucketList.Add(littlebucket5);
+            bucketList.Add(littlebucket6);
+            bucketList.Add(littlebucket7);
+            bucketList.Add(littlebucket8);
+            bucketList.Add(littlebucket9);
+            bucketList.Add(littlebucket10);
+            bucketList.Add(littlebucket11);
+            bucketList.Add(littlebucket12);
+            bucketList.Add(littlebucket13);
+            bucketList.Add(littlebucket14);
+            bucketList.Add(littlebucket15);
+            bucketList.Add(littlebucket16);
+            //开始只显示无令牌的情况
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.Appear(bucketList[0]);
+                for (int i = 1; i <= 16; i++)
+                {
+                    Animation.Disappear(bucketList[i]);
+                }
+            }));
         }
 
+        //计算出时间线并开始动画
         private void Button_Click_Start_Animation(object sender, RoutedEventArgs e)
         {
-            //IsEnabled = false;
+
             timer = new System.Timers.Timer(100);
             //timer.Interval = TimeSpan.FromMilliseconds(100);
-            //设置是否执行System.Timers.Timer.Elapsed事件
             timer.Enabled = true;
-            //绑定Elapsed事件
             timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
-            //timer.Tick += timer_Tick;
             timer.Start();
             long currentTicks = DateTime.Now.Ticks;
             DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             startMillis = (currentTicks - dtFrom.Ticks) / 10000;
-            //int time = 0;
-            Animation.LeftSlide(littleblock, 0);
-            Animation.RightSlide(littleblock_red, Animation.AppearDuration + Animation.MoveDuration);
-            //Animation.Appear(littlebucket16);
-            Animation.Disappear(littlebucket16);
         }
 
-        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        private void BlockMove1()
         {
-            tickCount++;
-            if (tickCount % 10 == 0)
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.LeftSlide(littleblock1, 0);
+                Animation.RightSlide(littleblock_green1, Animation.AppearDuration + Animation.MoveDurationLeft);
+            }));
+        }
+        private void BlockMove2()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.LeftSlide(littleblock2, 0);
+                Animation.RightSlide(littleblock_green2, Animation.AppearDuration + Animation.MoveDurationLeft);
+            }));
+        }
+        private void BlockMove3()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.LeftSlide(littleblock3, 0);
+                Animation.RightSlide(littleblock_green3, Animation.AppearDuration + Animation.MoveDurationLeft);
+            }));
+        }
+        private void BlockMove4()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.LeftSlide(littleblock4, 0);
+                Animation.RightSlide(littleblock_green4, Animation.AppearDuration + Animation.MoveDurationLeft);
+            }));
+        }
+        private void BlockMove5()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.LeftSlide(littleblock5, 0);
+                Animation.RightSlide(littleblock_green5, Animation.AppearDuration + Animation.MoveDurationLeft);
+            }));
+        }
+
+        private void updateBucketPerStep(int before, int after)
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Animation.Disappear(bucketList[before]);
+                Animation.Appear(bucketList[after]);
+            }));
+        }
+        private void updateBucket(int tickCount)
+        {
+
+            if (myTimeLine.BucketShowTimeLine[tickCount] == myTimeLine.BucketShowTimeLine[tickCount - 1])
+            {
+                return;
+            }
+            else
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     Animation.Appear(littlebucket16);
                 }));
             }
-            if (tickCount % 10 == 5)
+        }
+
+        //Timer的周期性操作函数
+        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            tickCount++;
+            //先只显示前2.1秒。
+            if (tickCount <= 21)
             {
-                this.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    Animation.Disappear(littlebucket16);
-                }));
+                updateBucket(tickCount);
+            }
+            //if (tickCount % 10 == 0)
+            //{
+            //    this.Dispatcher.BeginInvoke(new Action(() =>
+            //    {
+            //        Animation.Appear(littlebucket16);
+            //    }));
+            //}
+            //if (tickCount % 10 == 5)
+            //{
+            //    this.Dispatcher.BeginInvoke(new Action(() =>
+            //    {
+            //        Animation.Disappear(littlebucket16);
+            //    }));
+            //}
+            if(tickCount == 10)
+            {
+                BlockMove1();
+            }
+            if(tickCount == 20)
+            {
+                BlockMove2();
+            }
+            if(tickCount == 30)
+            {
+                BlockMove3();
+            }
+            if(tickCount == 40)
+            {
+                BlockMove4();
+            }
+            if(tickCount == 50)
+            {
+                BlockMove5();
             }
             //long currentTicks = DateTime.Now.Ticks;
             //DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
@@ -168,27 +223,52 @@ namespace BucketGo
             thread.Start();
         }
 
+        //更新桶信息
+        private void Button_Click_Update_Bucket(object sender, RoutedEventArgs e)
+        {
+            if (d.Bucket == 0 || d.Speed == 0)
+            {
+                Xceed.Wpf.Toolkit.MessageBox m = new Xceed.Wpf.Toolkit.MessageBox();
+                m.Caption = "请输入正确数据！";
+                m.OkButtonContent = "确定";
+                Xceed.Wpf.Toolkit.MessageBox.Show("请输入整数，例如1,2,3……");
+            }
+            else
+            {
+                Bucket_ = d.Bucket;
+                Speed_ = d.Speed;
+            }
+        }
+
         //更新用户输入的新分组的信息
         private void updatePacket()
         {
-            
-            int tempId = currentPacketId;
-            //double tempTime = Convert.ToDouble(TimeInput.ToString());
-            //int tempSize = Convert.ToInt32(SizeInput.ToString());
-            double tempTime = d.Time;
-            int tempSize = d.Size;
-            Packet temp = new Packet(tempId, tempTime, tempSize);
-            p[currentPacketId] = temp;
-            
-            this.Dispatcher.BeginInvoke(new Action(() =>
+            if(d.Size==0 || d.Time == 0.0)
             {
-                //存储时，分组的Id是从0开始的，而展示时分组的Id是从1开始的
-                int tempShowId = currentPacketId + 1;
-                RightSideText.Text += tempShowId + "号分组到达时间：" + tempTime + "ms, 分组大小：" + tempSize + "字节。\n";
-                //这里若写在Dispatcher外部，则会先运行。
-                currentPacketId++;
-            }));
-            
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    Xceed.Wpf.Toolkit.MessageBox.Show("请输入整数，例如1,2,3……");
+                }));
+            }
+            else
+            {
+                int tempId = currentPacketId;
+                //double tempTime = Convert.ToDouble(TimeInput.ToString());
+                //int tempSize = Convert.ToInt32(SizeInput.ToString());
+                int tempTime = d.Time;
+                int tempSize = d.Size;
+                Packet temp = new Packet(tempId, tempTime, tempSize);
+                p[currentPacketId] = temp;
+
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    //存储时，分组的Id是从0开始的，而展示时分组的Id是从1开始的
+                    int tempShowId = currentPacketId + 1;
+                    RightSideText.Text += tempShowId + "号分组到达时间：" + tempTime + "ms, 分组大小：" + tempSize + "字节。\n";
+                    //这里若写在Dispatcher外部，则会先运行。
+                    currentPacketId++;
+                }));
+            }   
         }
 
         private void Size_Input_TextChanged(object sender, TextChangedEventArgs e)
@@ -206,24 +286,27 @@ namespace BucketGo
 
         }
 
+        //测试动态生成图片（失败）
         private void Button_Click_Throw_Packet(object sender, RoutedEventArgs e)
         {
-            // Initialize a new Rectangle
-            Rectangle r = new Rectangle();
+      
+            // Create Image and set its width and height  
+            Image dynamicImage = new Image();
+            dynamicImage.Width = 62;
+            dynamicImage.Height = 20;
 
-            // Set up rectangle's size
-            r.Width = 50;
-            r.Height = 50;
+            // Create a BitmapSource  
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri("Resources/littleblock.png", UriKind.RelativeOrAbsolute);
+            bitmap.EndInit();
 
-            // Set up the Background color
-            r.Fill = Brushes.Black;
+            // Set Image.Source  
+            dynamicImage.Source = bitmap;
 
-            // Set up the position in the window, at mouse coordonate
-            Canvas.SetTop(r, 50);
-            Canvas.SetLeft(r, 50);
-
-            // Add rectangle to the Canvas
-            this.main.Children.Add(r);
+            // Add Image to Window  
+            main.Children.Add(dynamicImage);
+            dynamicImage.Visibility = Visibility.Visible;
         }
     }
 }
