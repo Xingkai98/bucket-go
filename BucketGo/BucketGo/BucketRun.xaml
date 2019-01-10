@@ -1,0 +1,181 @@
+﻿<Window x:Class="BucketGo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BucketGo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="540" Width="960" WindowStyle="None"   AllowsTransparency="True" MouseLeftButtonDown="Window_MouseLeftButtonDown_Drag">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF86D2B8" Offset="0.491"/>
+                <GradientStop Color="#FF86D2B8" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="932"/>
+            <ColumnDefinition Width="21"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="main" Background="White" HorizontalAlignment="Left" Height="236" Margin="0,44,0,0"  VerticalAlignment="Top" Width="644"/>
+        <Image x:Name="littleblock1_1" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_2" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_3" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_4" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_5" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_6" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_7" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock1_8" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock1.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+
+        <Image x:Name="littleblock2_1" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_2" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_3" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_4" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_5" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_6" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_7" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock2_8" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock2.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+
+        <Image x:Name="littleblock3_1" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_2" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_3" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_4" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_5" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_6" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_7" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock3_8" Opacity="0.0" Source="Pack://Application:,,,/Resources/littleblock3.png" HorizontalAlignment="Left" Margin="10,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+
+        <Image x:Name="littleblock_red1_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_red1_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+
+        <Image x:Name="littleblock_red2_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_red2_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+
+        <Image x:Name="littleblock_red3_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_red3_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_red3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+
+        <Image x:Name="littleblock_green1_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+        <Image x:Name="littleblock_green1_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green1.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="20" />
+
+        <Image x:Name="littleblock_green2_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+        <Image x:Name="littleblock_green2_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green2.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="41" />
+
+        <Image x:Name="littleblock_green3_1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littleblock_green3_8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littleblock_green3.png" HorizontalAlignment="Left" Margin="296,163,0,295" RenderTransformOrigin="0.5,0.5" Width="62" />
+        <Image x:Name="littlebucket0" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket0.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket1" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket1.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket2" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket2.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket3" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket3.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket4" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket4.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket5" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket5.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket6" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket6.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket7" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket7.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket8" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket8.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket9" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket9.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket10" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket10.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket11" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket11.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket12" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket12.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket13" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket13.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket14" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket14.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket15" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket15.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Image x:Name="littlebucket16" Opacity="1.0" Source="Pack://Application:,,,/Resources/littlebucket16.png" HorizontalAlignment="Left" Margin="266,135,0,268" RenderTransformOrigin="0.5,0.5" Width="124" />
+        <Grid HorizontalAlignment="Left" Height="467" VerticalAlignment="Top" Width="309" Margin="644,44,0,0" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFDAF3B2" Offset="0"/>
+                    <GradientStop Color="#FF4AC29A" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid Height="476" Width="256">
+                <Button x:Name="AddPacket" Content="添加分组" HorizontalAlignment="Left" Margin="0,397,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Add_Packet" Background="#FFF3EBDF" FontSize="18" FontWeight="Bold"/>
+
+                <TextBox x:Name="RightSideText" TextWrapping="Wrap" BorderBrush="{x:Null}" CaretBrush="#FFDA3232" SelectionBrush="#FF74AFDE" Margin="-19,0,-19,179" FontSize="14" FontWeight="Bold">
+                    <TextBox.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFDAF3B2" Offset="0.184"/>
+                            <GradientStop Color="#FF4AC29A" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.Background>
+                </TextBox>
+                <TextBlock HorizontalAlignment="Left" Margin="2,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小：" FontWeight="Bold"/>
+                <Button x:Name="StartAnimation" Content="开始模拟" HorizontalAlignment="Left" Margin="0,432,0,0" VerticalAlignment="Top" Width="256" Height="30" Click="Button_Click_Start_Animation" Background="#FFF3EBDF" FontSize="18" FontWeight="Bold"/>
+                <TextBox x:Name="SizeInput" HorizontalAlignment="Left" Height="22" Margin="82,336,0,0" TextWrapping="Wrap" Text="{Binding Size}" VerticalAlignment="Top" Width="164" TextChanged="Size_Input_TextChanged"/>
+                <TextBlock HorizontalAlignment="Left" Margin="2,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" FontWeight="Bold"><Run Text="入桶"/><Run Text="时间"/><Run Text="："/></TextBlock>
+                <TextBox x:Name="TimeInput" HorizontalAlignment="Left" Margin="82,363,0,90" TextWrapping="Wrap" Text="{Binding Time}" Width="164" TextChanged="Time_Input_TextChanged"/>
+                <TextBlock HorizontalAlignment="Left" Margin="-645,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Width="90" Text="分组大小："/>
+
+            </Grid>
+
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="953" Margin="0" Grid.ColumnSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFB2F3B5"/>
+                    <GradientStop Color="#FFDAF3B2" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Content="BucketGo" HorizontalAlignment="Left" Height="44" Margin="10,0,0,0" VerticalAlignment="Top" Width="130" FontSize="24" FontWeight="Bold"/>
+            <Button  Content="退出" Click="Exit"  HorizontalAlignment="Left" Height="44" Margin="874,0,0,0" VerticalAlignment="Top" Width="79" FontSize="20" FontWeight="Bold" BorderBrush="#FF0C0C0C">
+                <Button.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FFB5F293" Offset="0"/>
+                        <GradientStop Color="#FFEDD891" Offset="1"/>
+                    </RadialGradientBrush>
+                </Button.Background>
+            </Button>
+
+        </Grid>
+        <TextBox HorizontalAlignment="Left" Height="151" Margin="10,360,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="634" Background="#FFE2FBE8" FontSize="16" FontWeight="DemiBold"/>
+        <Grid HorizontalAlignment="Left" Height="49" Margin="10,306,0,0" VerticalAlignment="Top" Width="634">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="108" FontSize="16" FontWeight="Bold"><Run Text="承诺突发度"/><Run Text="："/></TextBlock>
+            <TextBox Text="{Binding Bucket}" HorizontalAlignment="Left" Height="25" Margin="105,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" TextChanged="TextBox_TextChanged"/>
+            <TextBlock HorizontalAlignment="Left" Margin="267,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="130" FontSize="16" FontWeight="Bold"><Run Text="令牌增加速率"/><Run Text="："/></TextBlock>
+            <TextBox Text="{Binding Speed}" HorizontalAlignment="Left" Height="25" Margin="383,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" TextChanged="TextBox_TextChanged"/>
+            <Button Content="设置" HorizontalAlignment="Left" Margin="526,6.327,0,0" VerticalAlignment="Top" Width="89" Height="29.666" Click="Button_Click_Update_Bucket" FontSize="16" Background="#FFF3EBDF" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="196,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16"><Run Text="比特/秒"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="480,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="58" FontSize="16" FontWeight="Bold"><Run Text="比特"/></TextBlock>
+        </Grid>
+
+    </Grid>
+</Window>
