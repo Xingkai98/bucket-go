@@ -21,11 +21,11 @@ namespace BucketGo
         public const int step = 66;
         //path为从左到中间或从中间到右侧的距离
         public const int LeftPath = (WindowWidth - BlockWidth) / 2 - 20;
-        public const int RightPath = (WindowWidth + BlockWidth) / 2 +100;
+        public const int RightPath = (WindowWidth + BlockWidth) / 2 + 150;
         //duration为从左侧移动到中间或从中间移动到右侧的时间
         public const int AppearDuration = 500;
-        public const int MoveDurationLeft = 2000;
-        public const int MoveDurationRight = 2500;
+        public const int MoveDurationLeft = 2500;
+        public const int MoveDurationRight = 3000;
 
         public static void Appear(Image i)
         {

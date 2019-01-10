@@ -27,8 +27,9 @@ namespace BucketGo
     {
         public const int MAX_PACKET = 100;
         public const int Maximum = 10;
-        public const int RED = 101;
-        public const int GREEN = 102;
+        public const int BLUE = 997;
+        public const int RED = 998;
+        public const int GREEN = 999;
         public int currentPacketId = 0;
         public int[] a = new int[10];
         public Packet[] p = new Packet[MAX_PACKET];
@@ -36,10 +37,18 @@ namespace BucketGo
         public Timeline myTimeLine = new Timeline();
         //public List<Image> image = new List<Image>();   
         public List<Image> bucketList = new List<Image>();
+        public List<Image> blockList = new List<Image>();
+        public List<Image> redBlockList = new List<Image>();
+        public List<Image> greenBlockList = new List<Image>();
         public System.Timers.Timer timer;
         public long startMillis = 0;
         //已经进行了多少个100毫秒的周期
         public int tickCount = 0;
+        //三中颜色三种大小，九种状态每种八张图。记录已经使用到了第几个图，一共9*8=72个图
+        //blueCount[2]代表蓝色大小二使用到了哪里
+        public int[] blueCount = new int[4]{ 0, 1, 1, 1 };
+        public int[] redCount = new int[4] { 0, 1, 1, 1 };
+        public int[] greenCount = new int[4] { 0, 1, 1, 1 };
         //桶相关的数据
         public int Bucket_ = 0;
         public int Speed_ = 0;
@@ -49,6 +58,8 @@ namespace BucketGo
             InitializeComponent();
             //本语句用于数据绑定，必须要有
             this.DataContext = d;
+            //由于单个图片的变量名无法遍历，只能一个一个加，有些影响代码美观
+            //桶
             bucketList.Add(littlebucket0);
             bucketList.Add(littlebucket1);
             bucketList.Add(littlebucket2);
@@ -66,6 +77,81 @@ namespace BucketGo
             bucketList.Add(littlebucket14);
             bucketList.Add(littlebucket15);
             bucketList.Add(littlebucket16);
+            //未标记的分组
+            blockList.Add(littleblock1_1);
+            blockList.Add(littleblock1_2);
+            blockList.Add(littleblock1_3);
+            blockList.Add(littleblock1_4);
+            blockList.Add(littleblock1_5);
+            blockList.Add(littleblock1_6);
+            blockList.Add(littleblock1_7);
+            blockList.Add(littleblock1_8);
+            blockList.Add(littleblock2_1);
+            blockList.Add(littleblock2_2);
+            blockList.Add(littleblock2_3);
+            blockList.Add(littleblock2_4);
+            blockList.Add(littleblock2_5);
+            blockList.Add(littleblock2_6);
+            blockList.Add(littleblock2_7);
+            blockList.Add(littleblock2_8);
+            blockList.Add(littleblock3_1);
+            blockList.Add(littleblock3_2);
+            blockList.Add(littleblock3_3);
+            blockList.Add(littleblock3_4);
+            blockList.Add(littleblock3_5);
+            blockList.Add(littleblock3_6);
+            blockList.Add(littleblock3_7);
+            blockList.Add(littleblock3_8);
+            //标记为红色的分组
+            redBlockList.Add(littleblock_red1_1);
+            redBlockList.Add(littleblock_red1_2);
+            redBlockList.Add(littleblock_red1_3);
+            redBlockList.Add(littleblock_red1_4);
+            redBlockList.Add(littleblock_red1_5);
+            redBlockList.Add(littleblock_red1_6);
+            redBlockList.Add(littleblock_red1_7);
+            redBlockList.Add(littleblock_red1_8);
+            redBlockList.Add(littleblock_red2_1);
+            redBlockList.Add(littleblock_red2_2);
+            redBlockList.Add(littleblock_red2_3);
+            redBlockList.Add(littleblock_red2_4);
+            redBlockList.Add(littleblock_red2_5);
+            redBlockList.Add(littleblock_red2_6);
+            redBlockList.Add(littleblock_red2_7);
+            redBlockList.Add(littleblock_red2_8);
+            redBlockList.Add(littleblock_red3_1);
+            redBlockList.Add(littleblock_red3_2);
+            redBlockList.Add(littleblock_red3_3);
+            redBlockList.Add(littleblock_red3_4);
+            redBlockList.Add(littleblock_red3_5);
+            redBlockList.Add(littleblock_red3_6);
+            redBlockList.Add(littleblock_red3_7);
+            redBlockList.Add(littleblock_red3_8);
+            //标记为绿色的分组
+            greenBlockList.Add(littleblock_green1_1);
+            greenBlockList.Add(littleblock_green1_2);
+            greenBlockList.Add(littleblock_green1_3);
+            greenBlockList.Add(littleblock_green1_4);
+            greenBlockList.Add(littleblock_green1_5);
+            greenBlockList.Add(littleblock_green1_6);
+            greenBlockList.Add(littleblock_green1_7);
+            greenBlockList.Add(littleblock_green1_8);
+            greenBlockList.Add(littleblock_green2_1);
+            greenBlockList.Add(littleblock_green2_2);
+            greenBlockList.Add(littleblock_green2_3);
+            greenBlockList.Add(littleblock_green2_4);
+            greenBlockList.Add(littleblock_green2_5);
+            greenBlockList.Add(littleblock_green2_6);
+            greenBlockList.Add(littleblock_green2_7);
+            greenBlockList.Add(littleblock_green2_8);
+            greenBlockList.Add(littleblock_green3_1);
+            greenBlockList.Add(littleblock_green3_2);
+            greenBlockList.Add(littleblock_green3_3);
+            greenBlockList.Add(littleblock_green3_4);
+            greenBlockList.Add(littleblock_green3_5);
+            greenBlockList.Add(littleblock_green3_6);
+            greenBlockList.Add(littleblock_green3_7);
+            greenBlockList.Add(littleblock_green3_8);
             //开始只显示无令牌的情况
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -90,56 +176,52 @@ namespace BucketGo
             DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             startMillis = (currentTicks - dtFrom.Ticks) / 10000;
         }
+        private void doBlockMove(int out_color,int size)
+        {
+            //计数增加
+            BlockMove(out_color, size, blueCount[size]);
+            switch (out_color) {
+                case RED: blueCount[size]++; redCount[size]++; break;
+                case GREEN: blueCount[size]++; greenCount[size]++; break;
+            }
+        }
+        //size取1,2,3。
+        private void BlockMove(int out_color, int size, int count)
+        {
+            if (out_color == GREEN)
+            {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    int temp = (size - 1) * 8 + count - 1;
+                    Animation.LeftSlide(blockList[temp], 0);
+                    Animation.RightSlide(greenBlockList[temp], Animation.AppearDuration + Animation.MoveDurationLeft);
+                }));
+            }
+            else if (out_color == RED)
+            {
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    int temp = (size - 1) * 8 + count - 1;
+                    Animation.LeftSlide(blockList[temp], 0);
+                    Animation.RightSlide(redBlockList[temp], Animation.AppearDuration + Animation.MoveDurationLeft);
+                }));
+            }
+            else
+            {
 
-        private void BlockMove1()
-        {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Animation.LeftSlide(littleblock1, 0);
-                Animation.RightSlide(littleblock_green1, Animation.AppearDuration + Animation.MoveDurationLeft);
-            }));
+            }
         }
-        private void BlockMove2()
-        {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Animation.LeftSlide(littleblock2, 0);
-                Animation.RightSlide(littleblock_green2, Animation.AppearDuration + Animation.MoveDurationLeft);
-            }));
-        }
-        private void BlockMove3()
-        {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Animation.LeftSlide(littleblock3, 0);
-                Animation.RightSlide(littleblock_green3, Animation.AppearDuration + Animation.MoveDurationLeft);
-            }));
-        }
-        private void BlockMove4()
-        {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Animation.LeftSlide(littleblock4, 0);
-                Animation.RightSlide(littleblock_green4, Animation.AppearDuration + Animation.MoveDurationLeft);
-            }));
-        }
-        private void BlockMove5()
-        {
-            this.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                Animation.LeftSlide(littleblock5, 0);
-                Animation.RightSlide(littleblock_green5, Animation.AppearDuration + Animation.MoveDurationLeft);
-            }));
-        }
-
+        
         private void updateBucketPerStep(int before, int after)
         {
             this.Dispatcher.BeginInvoke(new Action(() =>
             {
-                Animation.Disappear(bucketList[before]);
-                Animation.Appear(bucketList[after]);
+                Animation.Disappear(bucketList[myTimeLine.BucketShowTimeLine[before]]);
+                Animation.Appear(bucketList[myTimeLine.BucketShowTimeLine[after]]);
             }));
         }
+
+        //更新桶信息的主函数
         private void updateBucket(int tickCount)
         {
 
@@ -149,10 +231,7 @@ namespace BucketGo
             }
             else
             {
-                this.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    Animation.Appear(littlebucket16);
-                }));
+                updateBucketPerStep(tickCount - 1, tickCount);
             }
         }
 
@@ -160,11 +239,8 @@ namespace BucketGo
         private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
         {
             tickCount++;
-            //先只显示前2.1秒。
-            if (tickCount <= 21)
-            {
+            if(tickCount <= 500)
                 updateBucket(tickCount);
-            }
             //if (tickCount % 10 == 0)
             //{
             //    this.Dispatcher.BeginInvoke(new Action(() =>
@@ -181,23 +257,23 @@ namespace BucketGo
             //}
             if(tickCount == 10)
             {
-                BlockMove1();
+                doBlockMove(RED, 1);
             }
             if(tickCount == 20)
             {
-                BlockMove2();
+                doBlockMove(GREEN, 3);
             }
             if(tickCount == 30)
             {
-                BlockMove3();
+                doBlockMove(RED, 1);
             }
             if(tickCount == 40)
             {
-                BlockMove4();
+                doBlockMove(GREEN, 2);
             }
             if(tickCount == 50)
             {
-                BlockMove5();
+                doBlockMove(RED, 1);
             }
             //long currentTicks = DateTime.Now.Ticks;
             //DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
