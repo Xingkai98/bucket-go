@@ -41,6 +41,7 @@ namespace BucketGo
         public List<Image> blockList = new List<Image>();
         public List<Image> redBlockList = new List<Image>();
         public List<Image> greenBlockList = new List<Image>();
+        public int maxTime = 0;
         public System.Timers.Timer timer;
         public long startMillis = 0;
         //已经进行了多少个100毫秒的周期
@@ -53,6 +54,8 @@ namespace BucketGo
         //桶相关的数据
         public int Bucket_ = 0;
         public int Speed_ = 0;
+        //结束时间
+        public int endTime = 500;
 
         public MainWindow()
         {
@@ -170,7 +173,8 @@ namespace BucketGo
             //向calculator输入数据以供计算
             calculator.rate = Speed_;
             calculator.bucket_size = Bucket_;
-            int maxTime = 0;
+            myTimeLine.MaxSize = Bucket_;
+            
             for (int i = 0; i < currentPacketId; i++)
             {
                 if (p[i].arrivalTime > maxTime)
@@ -182,6 +186,7 @@ namespace BucketGo
             }
             maxTime++;
             calculator.calculate(maxTime);
+            endTime = 10 * (maxTime + 2);
             //还需要维护一下最大分组长度和最小分组长度，以便生成分组时选择大小
             int maxSize = 0;
             for(int i=0;i< currentPacketId; i++)
@@ -196,6 +201,7 @@ namespace BucketGo
                     minSize = p[i].size;
             }
             //计算完毕，接下来根据时间线进行动画模拟
+            //首先模拟分组的情况
             for (int i = 0; i < maxTime; i++)
             {
                 if (calculator.packet_size[i] > 0)
@@ -207,32 +213,96 @@ namespace BucketGo
                     //int translated_size = ((double)calculator.packet_size[i]- (double)minSize)/((double)maxSize - (double)minSize)*(double)2+(double)1
                     int temp = calculator.packet_size[i];
                     int translated_size = 0;
-                    int gap = (maxSize - minSize)/3;
-                    if(temp>=minSize && temp < minSize + gap)
+                    if(temp>=1 && temp <= 3)
                     {
-                        translated_size = 1;
-                    }
-                    else if(temp >= minSize+gap && temp < minSize + 2 * gap)
-                    {
-                        translated_size = 2;
+                        translated_size = temp;
                     }
                     else
                     {
-                        translated_size = 3;
+                        int gap = (maxSize - minSize) / 3;
+                        if (temp >= minSize && temp < minSize + gap)
+                        {
+                            translated_size = 1;
+                        }
+                        else if (temp >= minSize + gap && temp < minSize + 2 * gap)
+                        {
+                            translated_size = 2;
+                        }
+                        else
+                        {
+                            translated_size = 3;
+                        }
                     }
+                    
+                    //i==1是对应的0秒进入的情况，因为在计时器中，count是以1开始的。
                     if (calculator.color[i] == 1)
                     {
-                        myTimeLine.PacketGoTimeLine[10 * (i - 1)] = GREEN;
-                        myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                        if (i == 1)
+                        {
+                            myTimeLine.PacketGoTimeLine[1] = GREEN;
+                            myTimeLine.PacketGoTimeLine_Size[1] = translated_size;
+                        }
+                        else
+                        {
+                            myTimeLine.PacketGoTimeLine[10 * (i - 1)] = GREEN;
+                            myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                        }
                     }
                     else
                     {
-                        myTimeLine.PacketGoTimeLine[10 * (i - 1)] = RED;
-                        myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                        if (i == 1)
+                        {
+                            myTimeLine.PacketGoTimeLine[1] = GREEN;
+                            myTimeLine.PacketGoTimeLine_Size[1] = translated_size;
+                        }
+                        else
+                        {
+                            myTimeLine.PacketGoTimeLine[10 * (i - 1)] = RED;
+                            myTimeLine.PacketGoTimeLine_Size[10 * (i - 1)] = translated_size;
+                        }
                     }
                         
                 }
             }
+            //然后模拟桶的情况,时间线从0到maxTime-1，映射到时间线下标为10*(time+2)
+            for(int i = 0; i < maxTime; i++)
+            {
+                //首先把token_left[i]覆盖到时间线[j]
+                myTimeLine.BucketTimeLine[10 * (i + 2)] = calculator.token_left_array[i];
+                int from = calculator.token_left_array[i];
+                int to = calculator.token_before_array[i+1];
+                //若前后相等，则直接赋值
+                if (from == to)
+                {
+                    for (int j = 10 * (i + 2) + 1; j <= 10 * (i + 3); j++)
+                    {
+                        myTimeLine.BucketTimeLine[j] = from;
+                    }
+                }
+                //若前后不等，还需均匀增加
+                else
+                {
+                    //然后从时间线[j+1]向后10，均匀赋值
+                    int perstep = 10 / (to - from);
+                    int tempp = 0;
+                    int start = from;
+                    for (int j = 10 * (i + 2) + 1; j <= 10 * (i + 3); j++)
+                    {
+                        if(tempp%perstep==0 && tempp != 0)
+                        {
+                            start++;
+                        }
+                        myTimeLine.BucketTimeLine[j] = start;
+                        tempp++;
+                    }
+                }
+                
+            }
+            //转化为桶大小
+            myTimeLine.getShowTimeLine();
+            //输出calculator信息
+            Thread outputThread = new Thread(output);
+            outputThread.Start();
             int wwwww = 0;
             timer = new System.Timers.Timer(100);
             //timer.Interval = TimeSpan.FromMilliseconds(100);
@@ -243,11 +313,44 @@ namespace BucketGo
             DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             startMillis = (currentTicks - dtFrom.Ticks) / 10000;
         }
+
+        private void output()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                OutputText.Text += "备注：“标记颜色”一栏中，-1代表无分组进入，0代表红色，1代表绿色。\n";
+                OutputText.Text += "时间      ： ";
+                for(int i = 0; i < maxTime; i++)
+                {
+                    OutputText.Text += i+" ";
+                }
+                OutputText.Text += "\n";
+                OutputText.Text += "分组大小： ";
+                for (int i = 0; i < maxTime; i++)
+                {
+                    OutputText.Text += calculator.packet_size[i] + " ";
+                }
+                OutputText.Text += "\n";
+                OutputText.Text += "令牌序列： ";
+                for (int i = 0; i < maxTime; i++)
+                {
+                    OutputText.Text += calculator.token_left_array[i] + " ";
+                }
+                OutputText.Text += "\n";
+                OutputText.Text += "标记颜色： ";
+                for (int i = 0; i < maxTime; i++)
+                {
+                    OutputText.Text += calculator.color[i] + " ";
+                }
+                OutputText.Text += "\n";
+            }));
+        }
+
         //Timer的周期性操作函数
         private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
         {
             tickCount++;
-            if (tickCount <= 500)
+            if (tickCount <= endTime)
                 updateBucket(tickCount);
             //这里还要设置一下包的大小，现在是都是1
             if (myTimeLine.PacketGoTimeLine[tickCount] == GREEN)
@@ -265,6 +368,7 @@ namespace BucketGo
 
             //time.Text = tickCount.ToString();
         }
+        //分组移动的调用函数
         private void doBlockMove(int out_color,int size)
         {
             //计数增加
@@ -274,6 +378,7 @@ namespace BucketGo
                 case GREEN: blueCount[size]++; greenCount[size]++; break;
             }
         }
+        //分组调用的细节调用函数
         //size取1,2,3。
         private void BlockMove(int out_color, int size, int count)
         {
@@ -324,17 +429,6 @@ namespace BucketGo
             }
         }
 
-        
-        private void Test()
-        {
-            while (true)
-            {
-                Thread.Sleep(1000);
-                Animation.Appear(littlebucket16);
-                Thread.Sleep(1000);
-                Animation.Disappear(littlebucket16);
-            }
-        }
         //"添加分组"按钮函数，使用多线程处理
         private void Button_Click_Add_Packet(object sender, RoutedEventArgs e)
         {
@@ -345,7 +439,7 @@ namespace BucketGo
         //更新桶信息
         private void Button_Click_Update_Bucket(object sender, RoutedEventArgs e)
         {
-            if (d.Bucket == 0 || d.Speed == 0)
+            if (d.Speed == 0)
             {
                 Xceed.Wpf.Toolkit.MessageBox m = new Xceed.Wpf.Toolkit.MessageBox();
                 m.Caption = "请输入正确数据！";
@@ -354,7 +448,8 @@ namespace BucketGo
             }
             else
             {
-                Bucket_ = d.Bucket;
+                //Bucket_ = d.Bucket;
+                Bucket_ = 16;
                 Speed_ = d.Speed;
             }
         }

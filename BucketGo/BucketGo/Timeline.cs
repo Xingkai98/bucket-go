@@ -98,7 +98,7 @@ namespace BucketGo
         public const int GREEN = 102;
         //目前时间线大小为1000个100毫秒单位即，100秒
         //根据时间线定义每个时刻的Bucket大小
-
+        public int MaxSize = 0;
         public List<int> BucketTimeLine = new List<int>(1000);
         public List<int> BucketShowTimeLine = new List<int>(1000);
         //public List<bool> IfPacketTimeLine = new List<bool>(1000);
@@ -110,9 +110,9 @@ namespace BucketGo
             //初始化BucketTimeLine
             for(int i = 0; i < 1000; i++)
             {
-                BucketTimeLine.Add(i);
+                BucketTimeLine.Add(0);
             }
-            getShowTimeLine();
+            //getShowTimeLine();
             for (int i = 0; i < 1000; i++)
             {
                 PacketGoTimeLine.Add(0);
@@ -123,11 +123,14 @@ namespace BucketGo
             }
 
         }
+        //在原始数列获取好后，调用本函数转化为以1~16大小区间表示的桶大小
+        //因为最终展示的时候桶大小的范围只是1~16
         public void getShowTimeLine()
         {
-            int max = BucketTimeLine.Max();
-            int min = BucketTimeLine.Min();
-            int div = (max - min) / 16;
+            int max = MaxSize;
+            int min = 0;
+            double double_div = (double)(max - min) / (double)16;
+            int div = (int)double_div;
             for (int i = 0; i < 1000; i++)
             {
                 double temp = (double)BucketTimeLine[i] / (double)max * (double)16;
